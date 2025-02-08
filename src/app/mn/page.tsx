@@ -142,7 +142,10 @@ export default function Home() {
                 NextJS дээр кодлодог. Өдөр болгон шинэ зүйл сурж, туршиж үзэх
                 дуртай нэгэн
               </p>
-              <button className="w-[187px] h-14 border rounded-full bg-background">
+              <button
+                onClick={handlecontact}
+                className="w-[187px] h-14 border rounded-full bg-background"
+              >
                 Холбогдох
               </button>
             </div>

@@ -146,7 +146,10 @@ export default function Home() {
                 i do code and i love it. i usually code with nextjs. And try to
                 try different things every single day
               </p>
-              <button className="w-[187px] h-14 border rounded-full bg-background">
+              <button
+                onClick={handlecontact}
+                className="w-[187px] h-14 border rounded-full bg-background"
+              >
                 Contact me
               </button>
             </div>
