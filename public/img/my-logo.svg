@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-1 {
+        stroke: #fff;
+        stroke-width: 15px;
+        fill-rule: evenodd;
+      }
+
+      .cls-2 {
+        font-size: 97.908px;
+        text-anchor: middle;
+        font-family: "Helvetica Neue";
+        font-weight: 300;
+      }
+    </style>
+  </defs>
+  <path id="Line_2" data-name="Line 2" class="cls-1" d="M472.754,39.071l1.272,0.593L172.962,686.044l-1.272-.593Zm0,0,1.272,0.593L172.962,686.044l-1.272-.593Z"/>
+  <path id="Line_2-2" data-name="Line 2" class="cls-1" d="M477.236,38.979l-1.271.593,300.8,646.471,1.271-.592Zm0,0-1.271.593,300.8,646.471,1.271-.592Z"/>
+  <path id="Line_3" data-name="Line 3" class="cls-1" d="M406.014,419.836v-0.667H1133v0.667H406.014Z"/>
+  <text id="_" data-name="&lt;/&gt;" class="cls-2" transform="translate(476 393.052) scale(1.532 1.539)"><tspan x="0">&lt;/&gt;</tspan></text>
+</svg>

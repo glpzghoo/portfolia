@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Food delivery",
+    "img": "https://pinebaatars.s3.us-west-2.amazonaws.com/uploaded1738171624823-4fSU0I.jpg",
+    "desc": "Food deliver web app",
+    "link": "https://food-project.glpzghoo.space/"
+  },
+  {
+    "name": "Weather",
+    "img": "https://pinebaatars.s3.us-west-2.amazonaws.com/screenshot-2024-12-17-111702-Qw1KVe.png",
+    "desc": "i made a realtime weather web app using nextjs",
+    "link": "https://realtime-weather.glpzghoo.space/"
+  },
+  {
+    "name": "Movie",
+    "img": "https://pinebaatars.s3.us-west-2.amazonaws.com/uploaded1736412981765-sGYVPT.jpg",
+    "desc": "Movie website to get latest available information",
+    "link": "https://movie-app.glpzghoo.space/"
+  },
+  {
+    "name": "Todo",
+    "img": "https://pinebaatars.s3.us-west-2.amazonaws.com/screenshot-2024-12-03-203515-9pijuz.png",
+    "desc": "Todo. Add, Edit, Delete tasks",
+    "link": "https://todo.glpzghoo.space/"
+  },
+  {
+    "name": "Unread",
+    "img": "https://pinebaatars.s3.us-west-2.amazonaws.com/screenshot-2024-12-03-203951-T_pNkq.png",
+    "desc": "First ever project where i made unread.today homepage using solely HTML, CSS",
+    "link": "https://unread-copy.glpzghoo.space"
+  }
+]
