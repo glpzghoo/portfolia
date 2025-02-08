@@ -77,20 +77,22 @@ export default function Home() {
       </div>
       <div ref={goTop} className="h-10 w-full flex justify-center box-border">
         <div className="w-[90%] flex items-center p-9 pt-10 justify-around">
-          <div className="flex items-center -space-x-4">
-            <div>
-              <Image
-                src={`/img/my-logo.png`}
-                width={100}
-                height={100}
-                alt="my logo"
-              />
+          <Link href={`/`}>
+            <div className="flex items-center -space-x-4">
+              <div>
+                <Image
+                  src={`/img/my-logo.png`}
+                  width={100}
+                  height={100}
+                  alt="my logo"
+                />
+              </div>
+              <div className="flex flex-col items-end">
+                <div className=" font-extrabold text-xl">adiyakhuu</div>
+                <div className=" text-sm">nergui</div>
+              </div>
             </div>
-            <div className="flex flex-col items-end">
-              <div className=" font-extrabold text-xl">adiyakhuu</div>
-              <div className=" text-sm">nergui</div>
-            </div>
-          </div>
+          </Link>
           <div className="flex gap-4">
             {/* button 1 */}
             <div
