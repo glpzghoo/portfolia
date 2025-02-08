@@ -317,7 +317,7 @@ export default function Home() {
         </div>
       </div>
       <div className="lg:hidden fixed transform left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ">
-        I'm still working on mobile version.
+        I&apos;m still working on mobile version.
       </div>
     </>
   );
