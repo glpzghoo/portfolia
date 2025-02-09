@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import { Geist, Geist_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   title: "Nergui Adiyakhuu",
   description: "Portfolia for Nergui Adiyakhuu",
 };
-const poppins = Poppins({ weight: "500", subsets: ["latin"] });
+const poppins = Montserrat({ weight: "500", subsets: ["latin"] });
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,7 +37,9 @@ export default function RootLayout({
             height={10000}
           />
         </div>
-        <div className="z-1 relative w-full">{children}</div>
+        <div className="z-1 relative w-full">
+          <Suspense fallback={<div>Please wait...</div>}>{children}</Suspense>
+        </div>
       </body>
     </html>
   );

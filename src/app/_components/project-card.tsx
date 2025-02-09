@@ -19,7 +19,7 @@ export default function Card({ project }: Props) {
         height={125}
       />
       <div className="text-start">
-        <Link href={`${project.link}`}>
+        <Link target="blank" href={`${project.link}`}>
           <h1 className="text-2xl font-extrabold">{project.name}</h1>
         </Link>
         <p className="font-extralight text-xs truncate text-wrap">
