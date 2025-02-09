@@ -262,7 +262,7 @@ export default function Home() {
                 className={`${inter.className} items-center text-center flex flex-col gap-10`}
               >
                 <div>
-                  <div className={`text-5xl font-extrabold`}>Төслүүд</div>
+                  <div className={`text-5xl font-extrabold`}>PROJECTS</div>
                 </div>
                 {/* project carsd */}
                 <div className="flex justify-center gap-5">
