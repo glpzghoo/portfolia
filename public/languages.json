@@ -8,5 +8,7 @@
   "Tailwind CSS",
   "ExpressJs",
   "NoSql",
-  "SQL"
+  "SQL",
+  "Prisma ORM",
+  "PostgreSQL"
 ]

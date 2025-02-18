@@ -25,6 +25,18 @@ export function Experience({
     fetchProjects();
   }, []);
   const date = new Date();
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "short" });
+  const month_ = date.toLocaleString("en-US", { month: "2-digit" });
+  const year = date.getFullYear();
+  const suffix =
+    day === 1 || day === 21 || day === 31
+      ? `st`
+      : day === 2 || day === 22
+      ? `nd`
+      : day === 3 || day === 23
+      ? `rd`
+      : `th`;
   return (
     <motion.div
       initial={{ opacity: 0, x: -1000 }}
@@ -53,9 +65,20 @@ export function Experience({
           <div className="flex flex-col gap-6">
             <div className="flex justify-between">
               <div className="">Junior Software Engineer</div>
-              <div className="font-extralight text-xs">
-                9 2024 - {lang === "mn" ? `Одоо` : `PRESENT`} ({date.getMonth()}
-                , {date.getFullYear()})
+              <div className="text-xs flex  gap-3 font-bold">
+                09 - 2024 -
+                {lang === "mn" ? (
+                  <div className="text-red-400 flex animate-pulse">
+                    {month_}-р сарын {day}-н, {year}
+                    <div className="text-foreground">(Өнөөдөр)</div>
+                  </div>
+                ) : (
+                  <div className="text-red-400 flex animate-pulse">
+                    {month}-{day}
+                    {suffix}, {year}
+                    <div className="text-foreground">(Today)</div>
+                  </div>
+                )}
               </div>
             </div>
             <p className="text-xl font-light">{children}</p>

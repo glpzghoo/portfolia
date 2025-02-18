@@ -10,7 +10,7 @@ export function Headers({ handleabout, handlecontact, lang }: Props) {
   return (
     <div className="w-[90%] flex items-center p-9 pt-10 justify-around">
       <Link href={`/`}>
-        <div className="flex items-center -space-x-4">
+        <div className="flex items-center -space-x-4 sticky">
           <div>
             <Image
               src={`/img/my-logo.png`}

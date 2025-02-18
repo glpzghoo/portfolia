@@ -1,7 +1,6 @@
 "use client";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 import { Headers } from "../_components/header";
 import { Introduction } from "../_components/introduction";
 import { Aboutme } from "../_components/aboutme";
@@ -10,6 +9,7 @@ import { Project } from "../_components/projects";
 import { Contact } from "../_components/contact";
 import { Text } from "../_components/mobilesoon";
 import { useRouter, useSearchParams } from "next/navigation";
+import Spotify from "../_components/spotify";
 export default function Home() {
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang");
@@ -48,6 +48,13 @@ export default function Home() {
   const handleGoTop = () => {
     goTop.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
+  const handleChangeLang = () => {
+    if (lang === "mn") {
+      router.replace(`/main?lang=en`, undefined);
+    } else {
+      router.replace(`/main?lang=mn`);
+    }
+  };
   return (
     <>
       {!lang ? (
@@ -71,19 +78,19 @@ export default function Home() {
             />
           </div>
           {lang === "mn" ? (
-            <Link
-              href={`/main?lang=en`}
+            <button
+              onClick={handleChangeLang}
               className="fixed w-10 h-10 bottom-10 right-10"
             >
               EN
-            </Link>
+            </button>
           ) : (
-            <Link
-              href={`/main?lang=mn`}
+            <button
+              onClick={handleChangeLang}
               className="fixed w-10 h-10 bottom-10 right-10"
             >
               MN
-            </Link>
+            </button>
           )}
 
           <div className=" w-full p-40 items-center justify-center flex flex-col gap-[600px]">
@@ -96,7 +103,11 @@ export default function Home() {
                   to try different things every single day`}
             </Introduction>
             {/* About me */}
-            <div ref={aboutme} tabIndex={0}>
+            <div
+              ref={aboutme}
+              tabIndex={0}
+              className="flex justify-center flex-col"
+            >
               <Aboutme lang={lang}>
                 {lang === "mn"
                   ? `Би бол юм болгоныг туршиж үзэх дуртай нэгэн. Намайг аль багаас
@@ -118,16 +129,24 @@ export default function Home() {
                     most helpful and wholesome people I have ever known. They
                     made everything I once thought impossible feel possible.`}
               </Aboutme>
+              <div className="flex flex-col items-center text-2xl font-bold">
+                <div className=" animate-pulse">
+                  {lang === "mn"
+                    ? `Уйтгартай дуунуудаасаа- `
+                    : `My boring yet all-time favorite songs `}
+                </div>
+                <Spotify />
+              </div>
             </div>
             {/* Experience */}
             <div>
               <Experience lang={lang}>
                 {lang === "mn"
                   ? `Яг одоогоор би Pinecone сурж байгаа, Сураад 5дах сар дээрээ явж
-              байгаа болно. Би 5дах төслөө дуусгасан бөгөөд, суртлаа илүү ихийг
+              байгаа болно. Би 6дах төслөө дуусгасан бөгөөд, суртлаа илүү ихийг
               сурахыг хичээж байгаа болно.`
                   : `It's been five months since I started attending Pinecone
-                      Academy. So far, I've completed five projects (and made a
+                      Academy. So far, I've completed six projects (and made a
                       lot of mistakes along the way). But I'm learning something
                       new every single day!`}
               </Experience>

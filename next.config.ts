@@ -1,7 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
@@ -10,6 +9,19 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: "frame-src 'self' https://open.spotify.com;",
+          },
+        ],
+      },
+    ];
   },
 };
 
