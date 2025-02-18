@@ -22,7 +22,7 @@ export default function Home() {
     if (!lang || (lang !== "mn" && lang !== "en")) {
       router.replace(`/main?lang=mn`);
     }
-  }, []);
+  }, [lang]);
   const handleLeft = () => {
     if (scrolling.current) {
       scrolling.current.scrollBy({ left: -400, behavior: "smooth" });
