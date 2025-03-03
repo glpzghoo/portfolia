@@ -10,6 +10,7 @@ import { Contact } from "../_components/contact";
 import { Text } from "../_components/mobilesoon";
 import { useRouter, useSearchParams } from "next/navigation";
 import Spotify from "../_components/spotify";
+import Link from "next/link";
 export default function Home() {
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang");
@@ -48,13 +49,13 @@ export default function Home() {
   const handleGoTop = () => {
     goTop.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
-  const handleChangeLang = () => {
-    if (lang === "mn") {
-      router.replace(`/main?lang=en`, undefined);
-    } else {
-      router.replace(`/main?lang=mn`);
-    }
-  };
+  // const handleChangeLang = () => {
+  //   if (lang === "mn") {
+  //     router.replace(``, undefined);
+  //   } else {
+  //     router.replace(`/main?lang=mn`);
+  //   }
+  // };
   return (
     <>
       {!lang ? (
@@ -78,19 +79,13 @@ export default function Home() {
             />
           </div>
           {lang === "mn" ? (
-            <button
-              onClick={handleChangeLang}
-              className="fixed w-10 h-10 bottom-10 right-10"
-            >
-              EN
-            </button>
+            <Link href={`/main?lang=en`} scroll={false}>
+              <button className="fixed w-10 h-10 bottom-10 right-10">EN</button>
+            </Link>
           ) : (
-            <button
-              onClick={handleChangeLang}
-              className="fixed w-10 h-10 bottom-10 right-10"
-            >
-              MN
-            </button>
+            <Link href={`/main?lang=mn`} scroll={false}>
+              <button className="fixed w-10 h-10 bottom-10 right-10">MN</button>
+            </Link>
           )}
 
           <div className=" w-full p-40 items-center justify-center flex flex-col gap-[600px]">
