@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
-
 export function Contact({ children }: { children: ReactNode }) {
   return (
     <motion.div
@@ -21,6 +20,7 @@ export function Contact({ children }: { children: ReactNode }) {
             width={100}
             height={100}
           />
+
           <div className="text-2xl">My GitHub</div>
         </div>
       </Link>
