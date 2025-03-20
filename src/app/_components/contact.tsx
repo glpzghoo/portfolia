@@ -12,7 +12,7 @@ export function Contact({ children }: { children: ReactNode }) {
       viewport={{ once: false }}
       className="p-10 rounded-lg shadow-lg"
     >
-      <Link target="blank" href={`https://github.com/adiyakhuu1`}>
+      <Link target="blank" href={`https://github.com/glpzghoo`}>
         <div className="justify-items-center">
           <Image
             src={`/img/github.svg`}
