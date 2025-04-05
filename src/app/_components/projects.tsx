@@ -16,6 +16,7 @@ export type project = {
   img: string;
   desc: string;
   link: string;
+  operable: boolean;
 };
 export function Project({ handleLeft, handleRight, scrolling, lang }: Props) {
   const [projects, setProject] = useState<project[]>([]);
@@ -44,9 +45,12 @@ export function Project({ handleLeft, handleRight, scrolling, lang }: Props) {
       <div
         className={`${inter.className} items-center text-center flex flex-col gap-10`}
       >
-        <div>
+        <div className="flex flex-col  gap-7">
           <div className={`text-5xl font-extrabold`}>
             {lang === "mn" ? `Төслүүд` : `Projects`}
+          </div>
+          <div className=" text-xs">
+            Зарим төсөл ашиглах/шалгах боломжгүй. Серверийн төлбөрөөс болоод :|
           </div>
         </div>
         {/* project carsd */}

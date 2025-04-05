@@ -1,23 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
-type project = {
-  name: string;
-  img: string;
-  desc: string;
-  link: string;
-};
+import { project } from "./projects";
+
 type Props = {
   project: project;
 };
 export default function Card({ project }: Props) {
   return (
-    <div className="w-[540px] h-32 flex justify-start gap-6 items-center">
+    <div className=" w-[540px] h-32 flex gap-6 items-center relative">
       <Image
         src={`${project.img}`}
         alt="project-pic"
         width={250}
         height={125}
       />
+
+      <div
+        className={`absolute top-2 text-xs left-0 px-5 ${
+          project.operable ? `bg-green-500` : `bg-red-500`
+        }  rounded-xl`}
+      >
+        {project.operable ? `Боломжтой` : `Боломжгүй`}
+      </div>
       <div className="text-start">
         <Link target="blank" href={`${project.link}`}>
           <h1 className="text-2xl font-extrabold">{project.name}</h1>
