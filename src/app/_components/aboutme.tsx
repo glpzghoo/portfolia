@@ -1,7 +1,5 @@
 import { motion } from "framer-motion";
-import { Inter } from "next/font/google";
 import { ReactNode } from "react";
-const inter = Inter({ subsets: ["latin"] });
 type Props = {
   children: ReactNode;
   lang: string;
@@ -16,9 +14,7 @@ export function Aboutme({ children, lang }: Props) {
       viewport={{ once: false }}
       className="p-10 rounded-lg shadow-lg"
     >
-      <div
-        className={`${inter.className} items-center text-center flex flex-col gap-4`}
-      >
+      <div className={` items-center text-center flex flex-col gap-4`}>
         <div>
           <div className={`text-5xl font-extrabold`}>
             {lang === "mn" ? `МИНИЙ ТУХАЙ` : `ABOUT ME`}

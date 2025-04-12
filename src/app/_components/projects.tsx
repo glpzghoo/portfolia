@@ -1,10 +1,8 @@
 import { motion } from "framer-motion";
-import { Inter } from "next/font/google";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Card from "./project-card";
 import { MouseEventHandler, ReactNode, Ref } from "react";
 import { projects } from "@/lib/data";
-const inter = Inter({ subsets: ["latin"] });
 type Props = {
   handleLeft: MouseEventHandler<HTMLButtonElement>;
   handleRight: MouseEventHandler<HTMLButtonElement>;
@@ -23,9 +21,7 @@ export function Project({ handleLeft, handleRight, scrolling, lang }: Props) {
       viewport={{ once: false }}
       className="p-10 rounded-lg shadow-lg"
     >
-      <div
-        className={`${inter.className} items-center text-center flex flex-col gap-10`}
-      >
+      <div className={` items-center text-center flex flex-col gap-10`}>
         <div className="flex flex-col  gap-7">
           <div className={`text-5xl font-extrabold`}>
             {lang === "mn" ? `Төслүүд` : `Projects`}

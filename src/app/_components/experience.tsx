@@ -1,8 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
-const inter = Inter({ subsets: ["latin"] });
 
 export function Experience({
   lang,
@@ -55,7 +53,6 @@ export function Experience({
     if (day === 3 || day === 23) return "rd";
     else return "th";
   };
-  console.log(exp.startAt);
   return (
     <motion.div
       initial={{ opacity: 0, x: odd % 2 === 1 ? 1000 : -1000 }}
@@ -65,9 +62,7 @@ export function Experience({
       viewport={{ once: false }}
       className="p-10 rounded-lg shadow-lg"
     >
-      <div
-        className={`${inter.className} items-center text-center flex flex-col gap-4`}
-      >
+      <div className={` items-center text-center flex flex-col gap-4`}>
         {head && (
           <div>
             <div>
@@ -87,11 +82,22 @@ export function Experience({
             <div className="flex justify-between">
               <div className="">Junior Software Engineer</div>
               <div className="text-xs flex  gap-3 font-bold">
-                {exp.startAt.toISOString().split("T")[0]} -
+                {lang === "mn" ? (
+                  <div>
+                    {exp.startAt.getMonth() + 1}-р сарын {exp.startAt.getDate()}
+                    -н, {exp.startAt.getFullYear() + " " + " ->"}
+                  </div>
+                ) : (
+                  <div>
+                    {exp.startAt.getMonth() + 1}-р сарын {exp.startAt.getDate()}
+                    -н, {exp.startAt.getFullYear() + " " + " ->"}
+                  </div>
+                )}
                 {exp.present ? (
                   <div>
                     {lang === "mn" ? (
                       <div className="text-red-400 flex animate-pulse">
+                        {" "}
                         {month_}-р сарын {day}-н, {year}
                         <div className="text-foreground">(Өнөөдөр)</div>
                       </div>

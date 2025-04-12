@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Montserrat } from "next/font/google";
+import { Geist, Geist_Mono, LXGW_WenKai_TC } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import { Suspense } from "react";
@@ -18,7 +18,10 @@ export const metadata: Metadata = {
   title: "Nergui Adiyakhuu",
   description: "Portfolia for Nergui Adiyakhuu",
 };
-const poppins = Montserrat({ weight: "500", subsets: ["latin"] });
+const montserrate = LXGW_WenKai_TC({
+  subsets: ["latin"],
+  weight: "400",
+});
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark ${poppins.className} overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark ${montserrate.className} overflow-x-hidden`}
       >
         <div className="fixed z-0">
           <Image
