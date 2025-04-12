@@ -91,12 +91,10 @@ export default function Home() {
           <div className=" w-full p-40 items-center justify-center flex flex-col gap-[600px]">
             <Introduction handlecontact={handlecontact} lang={lang}>
               {lang === "mn"
-                ? `Би сонирхлоорой код бичдэг. Бичихдээ ч маш их дуртай. Би React,
-            NextJS дээр кодлодог. Өдөр болгон шинэ зүйл сурж, туршиж үзэх дуртай
-            нэгэн`
-                : `i do code and i love it. i usually code with nextjs. And try
-                  to try different things every single day`}
+                ? `Би сонирхлоороо код бичдэг бөгөөд бичихдээ үнэхээр дуртай. Голчлон React, Next.js ашиглан хөгжүүлэлт хийдэг. Өдөр бүр шинэ зүйлсийг сурч, туршиж үзэхийг хүсдэг.`
+                : `I'm passionate about coding and truly enjoy it. I mainly build with React and Next.js. Every day, I try to learn something new or experiment with different ideas.`}
             </Introduction>
+
             {/* About me */}
             <div
               ref={aboutme}
@@ -105,19 +103,13 @@ export default function Home() {
             >
               <Aboutme lang={lang}>
                 {lang === "mn"
-                  ? `Би бол юм болгоныг туршиж үзэх дуртай нэгэн. Намайг аль багаас
-              минь ухаалаг гэж хүмүүс дууддаг байсан ч би тэрийгээ ашиглаж
-              чаддаггүй байсан. 10 жилээ төгсөөд их сургуульд ч явж чадаагүй
-              яагаад гэвэл тэр хэмжээний боломжийн айлын хүүхэд байгаагүй. Тийм
+                  ? `Би бол юм болгоныг туршиж үзэх дуртай нэгэн. Өөрөө бие даах чадвар сайн гэж боддог. Тийм
               ч учир би өөртөө англи хэл заан, тэрийгээ ч ашиглан бараг 2
               жилийг, канад "gaming streamer" -т youtube video засаж,
               хамтран ажилласан. Эцэст нь үргэлж боддог байсан Pinecone Academy
               -д, энэ бүх зүйлийг олон найрсан багш нар болон хамт олны ачаар
               сурж боловсрох боломж олдсон.`
-                  : `I tried many different things. In my childhood, people would
-                    say, "You are a smart kid" , but I wasn't sure
-                    because I knew I struggled a lot. Ever since high school, I
-                    have struggled to find my way. But I'm good at
+                  : `I tried many different things. I'm good at
                     self-teaching. I taught myself English, video editing, basic
                     computer science, etc. I love all of them. Thankfully, I
                     started attending Pinecone Academy, where I met some of the
@@ -137,13 +129,8 @@ export default function Home() {
             <div>
               <Experience lang={lang}>
                 {lang === "mn"
-                  ? `Яг одоогоор би Pinecone сурж байгаа, Сураад 5дах сар дээрээ явж
-              байгаа болно. Би 6дах төслөө дуусгасан бөгөөд, суртлаа илүү ихийг
-              сурахыг хичээж байгаа болно.`
-                  : `It's been five months since I started attending Pinecone
-                      Academy. So far, I've completed six projects (and made a
-                      lot of mistakes along the way). But I'm learning something
-                      new every single day!`}
+                  ? `Би Pinecone академид 6 сарын турш суралцаж төгссөн бөгөөд одоогоор дадлагын ажилд гарж байгаа болно. Энэ хугацаанд 5 жижиг, 1 дунд хэмжээний төслийг амжилттай гүйцэтгэсэн.`
+                  : `I completed 6 months of training at Pinecone Academy and am currently working as an intern. During this time, I successfully completed 4 small projects and 1 medium-sized project.`}
               </Experience>
             </div>
             {/* Projects */}
