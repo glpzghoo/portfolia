@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { Inter } from "next/font/google";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Card from "./project-card";
-import { MouseEventHandler, ReactNode, Ref, useEffect, useState } from "react";
+import { MouseEventHandler, ReactNode, Ref } from "react";
+import { projects } from "@/lib/data";
 const inter = Inter({ subsets: ["latin"] });
 type Props = {
   handleLeft: MouseEventHandler<HTMLButtonElement>;
@@ -11,28 +12,8 @@ type Props = {
   children?: ReactNode;
   lang: string;
 };
-export type project = {
-  name: string;
-  img: string;
-  desc: string;
-  link: string;
-  operable: boolean;
-};
-export function Project({ handleLeft, handleRight, scrolling, lang }: Props) {
-  const [projects, setProject] = useState<project[]>([]);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const res = await fetch(`/projects.json`);
-        const data: project[] = await res.json();
-        setProject(data);
-      } catch (e) {
-        console.error(e, "Project Oldsongui");
-      }
-    };
-    fetchProjects();
-  }, []);
+export function Project({ handleLeft, handleRight, scrolling, lang }: Props) {
   return (
     <motion.div
       initial={{ opacity: 0, x: 1000 }}

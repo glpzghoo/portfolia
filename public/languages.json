@@ -10,5 +10,8 @@
   "NoSql",
   "SQL",
   "Prisma ORM",
-  "PostgreSQL"
+  "PostgreSQL",
+  "Graphql",
+  "Jest",
+  "Cypress"
 ]

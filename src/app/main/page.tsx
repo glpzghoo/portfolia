@@ -11,6 +11,7 @@ import { Text } from "../_components/mobilesoon";
 import { useRouter, useSearchParams } from "next/navigation";
 import Spotify from "../_components/spotify";
 import Link from "next/link";
+import { experiences } from "@/lib/data";
 export default function Home() {
   const searchParams = useSearchParams();
   const lang = searchParams.get("lang");
@@ -127,11 +128,15 @@ export default function Home() {
             </div>
             {/* Experience */}
             <div>
-              <Experience lang={lang}>
-                {lang === "mn"
-                  ? `Би Pinecone академид 6 сарын турш суралцаж төгссөн бөгөөд одоогоор дадлагын ажилд гарж байгаа болно. Энэ хугацаанд 5 жижиг, 1 дунд хэмжээний төслийг амжилттай гүйцэтгэсэн.`
-                  : `I completed 6 months of training at Pinecone Academy and am currently working as an intern. During this time, I successfully completed 4 small projects and 1 medium-sized project.`}
-              </Experience>
+              {experiences.map((exp, i) => (
+                <Experience
+                  exp={exp}
+                  key={String(exp.startAt)}
+                  lang={lang}
+                  head={i === 0 ? true : false}
+                  odd={i}
+                />
+              ))}
             </div>
             {/* Projects */}
             <div tabIndex={0}>

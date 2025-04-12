@@ -1,9 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-import { project } from "./projects";
 
 type Props = {
   project: project;
+};
+type project = {
+  name: string;
+  img: string;
+  desc: string;
+  link: string;
+  operable: boolean;
 };
 export default function Card({ project }: Props) {
   return (
