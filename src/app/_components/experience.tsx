@@ -58,7 +58,7 @@ export function Experience({
   console.log(exp.startAt);
   return (
     <motion.div
-      initial={{ opacity: 0, x: odd ? 1000 : -1000 }}
+      initial={{ opacity: 0, x: odd % 2 === 1 ? 1000 : -1000 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8 }}
       exit={{ opacity: 0, y: 50 }}
