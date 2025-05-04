@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint", // ESLint integration
+    "GraphQL.vscode-graphql", // GraphQL syntax highlighting
+    "esbenp.prettier-vscode", // Prettier formatter
+    "Prisma.prisma", // Prisma language support
+    "bradlc.vscode-tailwindcss" // Tailwind CSS IntelliSense
+  ],
+  "unwantedRecommendations": [
+    "GitHub.copilot" // GitHub Copilot
+  ]
+}
