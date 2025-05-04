@@ -1,1 +1,1 @@
-npx run lint && npx run build
+npm run lint && npm run build
