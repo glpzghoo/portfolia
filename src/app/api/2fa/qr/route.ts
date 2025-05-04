@@ -3,6 +3,7 @@ import speakeasy from "speakeasy";
 import QRCode from "qrcode";
 
 export async function GET() {
+  return;
   const secret = process.env.SECRET!;
   console.log(secret);
   const otpauth = speakeasy.otpauthURL({
