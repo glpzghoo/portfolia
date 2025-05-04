@@ -1,13 +1,27 @@
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import { TerminalIcon } from "@/components/ui/terminal";
 import Image from "next/image";
 import Link from "next/link";
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, useState } from "react";
+import axios from "axios";
+
 type Props = {
   handleabout: MouseEventHandler<HTMLDivElement>;
   handlecontact: MouseEventHandler<HTMLDivElement>;
   lang: string;
 };
 export function Headers({ handleabout, handlecontact, lang }: Props) {
+  const [password, setPassword] = useState("");
+  const handleSubmit = async () => {
+    const res = await axios.post("/api/totp", { totp: password });
+    console.log(res.data);
+  };
   return (
     <div className="w-[90%] flex items-center p-9 pt-10 justify-around">
       <Link href={`/`}>
@@ -41,6 +55,31 @@ export function Headers({ handleabout, handlecontact, lang }: Props) {
         >
           {lang === `mn` ? "Холбогдох" : "Contact"}
         </div>
+        {/* button 3 */}
+        <Dialog>
+          <DialogTrigger>
+            <div className=" rounded-lg bg-foreground  w-24 h-[35px] text-background content-center text-center text-sm cursor-pointer">
+              {lang === `mn` ? "Админ?" : "Admin?"}
+            </div>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogTitle>
+              {lang === `mn` ? "Нууц үг?" : "Password?"}
+            </DialogTitle>
+            <div className=" flex flex-col gap-8">
+              <Input
+                type="text"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.code === "Enter") {
+                    handleSubmit();
+                  }
+                }}
+              />
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
