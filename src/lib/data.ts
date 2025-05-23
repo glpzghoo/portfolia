@@ -69,8 +69,8 @@ export const experiences = [
     endedAt: new Date("2025-04-11"),
     present: false,
     description_mn:
-      "Би Pinecone академид 6 сарын турш суралцаж төгссөн бөгөөд одоогоор дадлагын ажилд гарж байгаа болно. Энэ хугацаанд 5 жижиг, 1 дунд хэмжээний төслийг амжилттай гүйцэтгэсэн.",
+      "Би Pinecone академид 6 сарын турш суралцаж төгссөн. Энэ хугацаанд 5 жижиг, 1 дунд хэмжээний төслийг амжилттай гүйцэтгэсэн.",
     description_en:
-      "I completed 6 months of training at Pinecone Academy and am currently working as an intern. During this time, I successfully completed 5 small projects and 1 medium-sized project.",
+      "I completed 6 months of training at Pinecone Academy. During this time, I successfully completed 5 small projects and 1 medium-sized project.",
   },
 ];
