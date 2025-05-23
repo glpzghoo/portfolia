@@ -14,17 +14,22 @@ import Link from "next/link";
 import { experiences } from "@/lib/data";
 export default function Home() {
   const searchParams = useSearchParams();
+
   const lang = searchParams.get("lang");
+
   const router = useRouter();
+
   const scrolling = useRef<HTMLDivElement>(null);
   const aboutme = useRef<HTMLDivElement>(null);
   const contact = useRef<HTMLDivElement>(null);
   const goTop = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!lang || (lang !== "mn" && lang !== "en")) {
       router.replace(`/main?lang=mn`);
     }
   }, [lang, router]);
+
   const handleLeft = () => {
     if (scrolling.current) {
       scrolling.current.scrollBy({ left: -400, behavior: "smooth" });
@@ -37,26 +42,18 @@ export default function Home() {
   };
   const handleabout = () => {
     if (aboutme.current) {
-      // aboutme.current.focus();
       aboutme.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
   const handlecontact = () => {
     if (contact.current) {
-      // contact.current.focus();
       contact.current.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
   const handleGoTop = () => {
     goTop.current?.scrollIntoView({ behavior: "smooth", block: "center" });
   };
-  // const handleChangeLang = () => {
-  //   if (lang === "mn") {
-  //     router.replace(``, undefined);
-  //   } else {
-  //     router.replace(`/main?lang=mn`);
-  //   }
-  // };
+
   return (
     <>
       {!lang ? (
