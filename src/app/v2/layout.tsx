@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
@@ -13,12 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`antialiased dark `}>
-        <div className="z-1 relative w-full">
-          <Suspense fallback={<div>Please wait...</div>}>{children}</Suspense>
-        </div>
-      </body>
-    </html>
+    <div>
+      <Suspense fallback={<div>Please wait...</div>}>{children}</Suspense>
+    </div>
   );
 }

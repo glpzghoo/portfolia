@@ -1,15 +1,15 @@
 "use client";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import { useEffect, useRef } from "react";
-import { Headers } from "../_components/header";
-import { Introduction } from "../_components/introduction";
-import { Aboutme } from "../_components/aboutme";
-import { Experience } from "../_components/experience";
-import { Project } from "../_components/projects";
-import { Contact } from "../_components/contact";
-import { Text } from "../_components/mobilesoon";
+import { Headers } from "./_components/header";
+import { Introduction } from "./_components/introduction";
+import { Aboutme } from "./_components/aboutme";
+import { Experience } from "./_components/experience";
+import { Project } from "./_components/projects";
+import { Contact } from "./_components/contact";
+import { Text } from "./_components/mobilesoon";
 import { useRouter, useSearchParams } from "next/navigation";
-import Spotify from "../_components/spotify";
+import Spotify from "./_components/spotify";
 import Link from "next/link";
 import { experiences } from "@/lib/data";
 export default function Home() {
