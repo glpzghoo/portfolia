@@ -2,6 +2,7 @@ import { TerminalIcon } from "@/components/ui/terminal";
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEventHandler } from "react";
+import ThemeToggle from "./theme-toggle";
 type Props = {
   handleabout: MouseEventHandler<HTMLDivElement>;
   handlecontact: MouseEventHandler<HTMLDivElement>;
@@ -26,7 +27,7 @@ export function Headers({ handleabout, handlecontact, lang }: Props) {
           </div>
         </div>
       </Link>
-      <div className="flex gap-4">
+      <div className="flex gap-4 items-center">
         {/* button 1 */}
         <div
           onClick={handleabout}
@@ -41,6 +42,7 @@ export function Headers({ handleabout, handlecontact, lang }: Props) {
         >
           {lang === `mn` ? "Холбогдох" : "Contact"}
         </div>
+        <ThemeToggle />
       </div>
     </div>
   );

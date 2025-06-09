@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, LXGW_WenKai_TC } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import { Suspense } from "react";
+import { Providers } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,19 +31,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark ${montserrate.className} overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${montserrate.className} overflow-x-hidden`}
       >
-        <div className="fixed z-0">
-          <Image
-            src={`/img/Background-Pattern.svg`}
-            alt="background pattern"
-            width={10000}
-            height={10000}
-          />
-        </div>
-        <div className="z-1 relative w-full">
-          <Suspense fallback={<div>Please wait...</div>}>{children}</Suspense>
-        </div>
+        <Providers>
+          <div className="fixed z-0">
+            <Image
+              src={`/img/Background-Pattern.svg`}
+              alt="background pattern"
+              width={10000}
+              height={10000}
+            />
+          </div>
+          <div className="z-1 relative w-full">
+            <Suspense fallback={<div>Please wait...</div>}>{children}</Suspense>
+          </div>
+        </Providers>
       </body>
     </html>
   );
