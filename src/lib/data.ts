@@ -59,9 +59,10 @@ export const projects = [
 export const experiences = [
   {
     startAt: new Date("2025-04-11"),
-    endedAt: new Date(""),
-    present: true,
-    description_mn: "Одоогоор Pinecone академид дадлага хийж байгаа болно.",
+    endedAt: new Date("2025-06-06"),
+    present: false,
+    description_mn:
+      "Pinecone академид 2 сарын турш дадлага хйив. Уг хугацаандаа monorepo, unit test, end-to-end testing хийж сурсан болно.",
     description_en: "Currently interning at Pinecone Academy",
   },
   {
