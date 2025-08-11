@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, LXGW_WenKai_TC } from "next/font/google";
+import { Geist, Geist_Mono, Pacifico } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import { Suspense } from "react";
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Nergui Adiyakhuu",
   description: "Portfolia for Nergui Adiyakhuu",
 };
-const montserrate = LXGW_WenKai_TC({
+const montserrate = Pacifico({
   subsets: ["latin"],
   weight: "400",
 });
