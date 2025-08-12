@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 function AnimatedUnit({ value }: { value: number }) {
   const digits = Math.max(2, value.toString().length);
@@ -30,40 +30,28 @@ export default function TimeNow() {
     return () => clearInterval(t);
   }, []);
 
-  const years = now.getFullYear() - birth.getFullYear();
-  const monthDiff = now.getMonth() - birth.getMonth();
-  const dayDiff = now.getDate() - birth.getDate();
-
-  let months = monthDiff;
-  let days = dayDiff;
-  let adjustedYears = years;
-
-  if (dayDiff < 0) {
-    const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
-    days = dayDiff + prevMonth;
-    months -= 1;
-  }
-
-  if (months < 0) {
-    months += 12;
-    adjustedYears -= 1;
-  }
-
-  const lastMidnight = new Date(
+  const nextBirthday = new Date(
     now.getFullYear(),
-    now.getMonth(),
-    now.getDate(),
-    0,
-    0,
-    0,
-    0
+    birth.getMonth(),
+    birth.getDate(),
+    birth.getHours(),
+    birth.getMinutes(),
+    birth.getSeconds()
   );
-  const diffMs = now.getTime() - lastMidnight.getTime();
+  if (nextBirthday <= now) {
+    nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
+  }
+
+  const age = nextBirthday.getFullYear() - birth.getFullYear() - 1;
+
+  const diffMs = nextBirthday.getTime() - now.getTime();
   const totalSeconds = Math.floor(diffMs / 1000);
   const seconds = totalSeconds % 60;
   const totalMinutes = Math.floor(totalSeconds / 60);
   const minutes = totalMinutes % 60;
-  const hours = Math.floor(totalMinutes / 60);
+  const totalHours = Math.floor(totalMinutes / 60);
+  const hours = totalHours % 24;
+  const days = Math.floor(totalHours / 24);
 
   return (
     <div
@@ -76,8 +64,7 @@ export default function TimeNow() {
         flexWrap: "wrap",
       }}
     >
-      <AnimatedUnit value={adjustedYears} /> <span>нас</span>
-      <AnimatedUnit value={months} /> <span>сар</span>
+      <AnimatedUnit value={age} /> <span>нас</span>
       <AnimatedUnit value={days} /> <span>өдөр</span>
       <AnimatedUnit value={hours} /> <span>цаг</span>
       <AnimatedUnit value={minutes} /> <span>минут</span>
