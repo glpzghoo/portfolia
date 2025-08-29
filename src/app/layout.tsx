@@ -31,16 +31,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark ${montserrate.className} overflow-x-hidden`}
       >
-        {/* Video background */}
-        <video
-          src="https://res.cloudinary.com/de1g2bwml/video/upload/v1756466224/hncxryi4lgzxijy2alp6.mp4"
-          className="fixed inset-0 w-full h-full object-cover z-0"
-          muted
-          autoPlay
-          loop
-          playsInline
-        />
-
         {/* Page content */}
         <div className="relative z-10 w-full">
           <Suspense fallback={<div>Please wait...</div>}>{children}</Suspense>

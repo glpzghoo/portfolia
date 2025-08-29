@@ -2,10 +2,14 @@
 
 import type React from "react";
 import { ReactNode, useEffect, useState } from "react";
-import { TypeAnimation } from "react-type-animation";
-import TextField from "@mui/material/TextField";
 import Link from "next/link";
 import urlRegex from "url-regex-safe";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Bot, Loader2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
 
 const AI_URL = process.env.NEXT_PUBLIC_AI_URL ?? "http://localhost:8000";
 
@@ -18,19 +22,13 @@ interface Message {
 }
 
 export default function Home() {
-  const [animKey, setAnimKey] = useState(0);
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [suggested, setSuggested] = useState<ReactNode | null>(null);
+  const [response, setResponse] = useState<string | null>(null);
+  const [lang, setLang] = useState<Lang>("en");
   const [pendingAction, setPendingAction] = useState<null | "send_message">(
     null
-  );
-  const [suggested, setSuggested] = useState<ReactNode | null>(null);
-
-  const [lang, setLang] = useState<Lang>(() =>
-    typeof window !== "undefined"
-      ? (localStorage.getItem("lang") as Lang) || "mn"
-      : "mn"
   );
 
   const translations = {
@@ -38,7 +36,7 @@ export default function Home() {
       greeting: [
         "Hello! 👋",
         1200,
-        "I'm Adyaakhuu",
+        "I'm Adiyakhuu",
         1200,
         "Ask me anything about my work and experience ⤵",
       ],
@@ -72,26 +70,12 @@ export default function Home() {
 
   const t = translations[lang];
 
-  const [sequence, setSequence] = useState<Array<string | number>>(
-    t.greeting.slice()
-  );
-
   async function askOnce(e: React.FormEvent) {
     e.preventDefault();
     const question = q.trim();
     if (!question || loading) return;
-
-    const userMsg: Message = {
-      type: "user",
-      content: question,
-      timestamp: Date.now(),
-    };
-    setMessages((prev) => [...prev, userMsg]);
     setLoading(true);
     setQ("");
-
-    setSequence([t.typing]);
-    setAnimKey((k) => k + 1);
 
     try {
       if (pendingAction === "send_message") {
@@ -117,18 +101,10 @@ export default function Home() {
           content: answer,
           timestamp: Date.now(),
         };
-        setMessages((prev) => [...prev, aiMsg]);
-        setSequence([answer]);
-        setAnimKey((k) => k + 1);
-
+        setResponse(aiMsg.content);
         setPendingAction(null);
         return;
       }
-
-      const historyForAPI = messages.slice(-4).map((m) => ({
-        role: m.type === "user" ? "user" : "assistant",
-        content: m.content,
-      }));
 
       const res = await fetch(`${AI_URL}/ask`, {
         method: "POST",
@@ -138,7 +114,7 @@ export default function Home() {
         },
         body: JSON.stringify({
           question,
-          history: historyForAPI,
+          history: [],
           lang,
         }),
       });
@@ -154,11 +130,7 @@ export default function Home() {
         content: finalAnswer,
         timestamp: Date.now(),
       };
-      setMessages((prev) => [...prev, aiMsg]);
-
-      setSequence([finalAnswer]);
-      setAnimKey((k) => k + 1);
-
+      setResponse(aiMsg.content);
       if (data?.action?.type === "send_message") {
         setPendingAction("send_message");
       }
@@ -169,9 +141,8 @@ export default function Home() {
         content: errText,
         timestamp: Date.now(),
       };
-      setMessages((prev) => [...prev, aiMsg]);
-      setSequence([errText]);
-      setAnimKey((k) => k + 1);
+      setResponse(aiMsg.content);
+
       setPendingAction(null);
     } finally {
       setLoading(false);
@@ -179,7 +150,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    const text = sequence[0]?.toString() ?? "";
+    const text = response?.toString() ?? "";
 
     const urls = text.match(urlRegex());
 
@@ -208,66 +179,156 @@ export default function Home() {
     } else {
       setSuggested(null);
     }
-  }, [sequence]);
+  }, [response]);
 
   return (
-    <div className="min-h-screen">
-      <main className="container mx-auto px-4 py-8">
-        <div className="flex justify-end mb-4">
-          <div className="inline-flex rounded-xl border p-1 bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Subtle background accent */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent [mask-image:radial-gradient(60%_60%_at_50%_0%,#000_40%,transparent_100%)]" />
+
+      {/* Header */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+          <div className="flex items-center gap-2">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              <Bot className="h-6 w-6 text-primary" />
+            </motion.div>
+            <TypeAnimation
+              sequence={["Adiyakhuu", 1000]}
+              wrapper="span"
+              repeat={Infinity}
+            />
+          </div>
+
+          {/* Lang Switch */}
+          <div className="inline-flex items-center gap-1 rounded-xl border bg-muted p-1 shadow-sm">
             <button
-              className={`px-3 py-1 rounded-lg text-sm ${
-                lang === "en" ? "bg-muted" : ""
-              }`}
-              onClick={() => setLang("en")}
               type="button"
+              aria-label="Switch to English"
+              onClick={() => setLang("en")}
+              className={`px-3 py-1.5 rounded-md text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background ${
+                lang === "en"
+                  ? "bg-background shadow"
+                  : "hover:bg-background/50"
+              }`}
             >
               EN
             </button>
             <button
-              className={`px-3 py-1 rounded-lg text-sm ${
-                lang === "mn" ? "bg-muted" : ""
-              }`}
-              onClick={() => setLang("mn")}
               type="button"
+              aria-label="Switch to Mongolian"
+              onClick={() => setLang("mn")}
+              className={`px-3 py-1.5 rounded-md text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background ${
+                lang === "mn"
+                  ? "bg-background shadow"
+                  : "hover:bg-background/50"
+              }`}
             >
               MN
             </button>
           </div>
         </div>
+      </header>
 
-        <section className="max-w-4xl mx-auto mb-16 min-h-screen flex flex-col justify-center">
-          <div className="text-center mb-8 bg-foreground/75 rounded-xl shadow-xl p-6 md:p-10 lg:p-12 bg-opacity-10 backdrop-blur-lg ">
-            <div className="min-h-[120px] flex items-center justify-center mb-8">
-              <TypeAnimation
-                key={animKey}
-                sequence={sequence}
-                wrapper="div"
-                speed={50}
-                className="text-2xl md:text-3xl lg:text-4xl font-bold text-background text-center leading-tight"
-                repeat={0}
-                cursor
-              />
-            </div>
+      {/* Main */}
+      <main className="container mx-auto px-4">
+        {/* Hero / copy */}
+        <section className="mx-auto max-w-3xl text-center pt-16 sm:pt-24">
+          <motion.h1
+            initial={{ y: 6, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="text-3xl sm:text-4xl font-bold tracking-tight"
+          >
+            {lang === "mn"
+              ? "Асуух зүйлээ бичээрэй."
+              : "Ask anything. Get a crisp answer."}
+          </motion.h1>
+          <p className="mt-3 text-muted-foreground">
+            {lang === "mn" ? (
+              <>
+                Дарах:{" "}
+                <kbd className="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  Enter
+                </kbd>{" "}
+                илгээх,{" "}
+                <kbd className="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  Shift
+                </kbd>
+                +
+                <kbd className="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  Enter
+                </kbd>{" "}
+                шинэ мөр лүү шилжих.
+              </>
+            ) : (
+              <>
+                Press{" "}
+                <kbd className="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  Enter
+                </kbd>{" "}
+                to send,{" "}
+                <kbd className="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  Shift
+                </kbd>
+                +
+                <kbd className="rounded bg-muted px-1.5 py-0.5 text-xs">
+                  Enter
+                </kbd>{" "}
+                for a new line.
+              </>
+            )}
+          </p>
+        </section>
 
-            <div className="min-h-[120px] flex items-center justify-center mb-8">
-              {suggested}
-            </div>
+        {/* Answer / Response */}
+        <section
+          aria-live="polite"
+          className="mx-auto mt-10 sm:mt-14 max-w-3xl space-y-4"
+        >
+          {loading ? (
+            <Card className="border-primary/20">
+              <CardContent className="p-5 flex items-center gap-2 text-muted-foreground">
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                бодож байна...
+              </CardContent>
+            </Card>
+          ) : (
+            response && (
+              <Card className="border-primary/20">
+                <CardContent className="p-5">
+                  <div className="prose prose-neutral dark:prose-invert max-w-none whitespace-pre-line">
+                    {response}
+                  </div>
+                </CardContent>
+              </Card>
+            )
+          )}
 
-            <form onSubmit={askOnce} className="max-w-2xl mx-auto ">
-              <div className="flex gap-2 justify-center">
-                <TextField
+          {suggested && (
+            <Card>
+              <CardContent className="p-5">
+                <div className="text-sm text-muted-foreground">Линк:</div>
+                <div className="mt-1 break-words text-sm">{suggested}</div>
+              </CardContent>
+            </Card>
+          )}
+        </section>
+
+        {/* Ask box */}
+        <section className="sticky bottom-0 z-40 mx-auto mt-8 max-w-3xl pb-6">
+          <Card className="shadow-lg">
+            <CardContent className="p-3 sm:p-4">
+              <form onSubmit={askOnce} className="flex flex-col gap-3">
+                <Textarea
                   value={q}
                   onChange={(e) => setQ(e.target.value)}
                   placeholder={t.placeholder}
                   disabled={loading}
-                  variant="standard"
-                  sx={{
-                    minWidth: "300px",
-                    resize: "none",
-                    color: "white",
-                    textColor: "white",
-                  }}
+                  className="min-h-[72px] resize-y"
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !e.shiftKey) {
                       e.preventDefault();
@@ -275,11 +336,61 @@ export default function Home() {
                     }
                   }}
                 />
-              </div>
-            </form>
-          </div>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-xs text-muted-foreground hidden sm:inline">
+                    {q?.length ? `${q.length} chars` : ""}
+                  </span>
+                  <div className="ml-auto flex items-center gap-2">
+                    <Button
+                      type="submit"
+                      disabled={loading}
+                      className="min-w-[96px]"
+                    >
+                      {loading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Thinking…
+                        </>
+                      ) : lang === "mn" ? (
+                        "Асуух"
+                      ) : (
+                        "Ask"
+                      )}
+                    </Button>
+                  </div>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
         </section>
       </main>
+
+      {/* Optional: Featured Projects (kept for future) */}
+      {/*
+      <section className="container mx-auto my-16 max-w-6xl px-4">
+        <h2 className="text-3xl font-bold text-center mb-8">{t.projects}</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[1,2,3].map((i) => (
+            <Card key={i} className="group hover:shadow-lg transition-all duration-300 hover:scale-[1.02]">
+              <CardContent className="p-6">
+                <div className="w-full h-48 bg-muted rounded-lg mb-4 grid place-items-center text-muted-foreground">
+                  Project {i}
+                </div>
+                <h3 className="font-semibold text-lg mb-2">Sample Project {i}</h3>
+                <p className="text-muted-foreground text-sm mb-4">
+                  A brief description of this project and the technologies used to build it.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">React</span>
+                  <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">Node.js</span>
+                  <span className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">AI</span>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+      */}
     </div>
   );
 }
