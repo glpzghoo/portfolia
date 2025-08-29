@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Pacifico } from "next/font/google";
+import { Fredoka, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Image from "next/image";
 import { Suspense } from "react";
 
 const geistSans = Geist({
@@ -18,7 +17,7 @@ export const metadata: Metadata = {
   title: "Nergui Adiyakhuu",
   description: "Portfolia for Nergui Adiyakhuu",
 };
-const montserrate = Pacifico({
+const montserrate = Fredoka({
   subsets: ["latin"],
   weight: "400",
 });
@@ -32,15 +31,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark ${montserrate.className} overflow-x-hidden`}
       >
-        <div className="fixed z-0">
-          <Image
-            src={`/img/Background-Pattern.svg`}
-            alt="background pattern"
-            width={10000}
-            height={10000}
-          />
-        </div>
-        <div className="z-1 relative w-full">
+        {/* Video background */}
+        <video
+          src="https://res.cloudinary.com/de1g2bwml/video/upload/v1756466224/hncxryi4lgzxijy2alp6.mp4"
+          className="fixed inset-0 w-full h-full object-cover z-0"
+          muted
+          autoPlay
+          loop
+          playsInline
+        />
+
+        {/* Page content */}
+        <div className="relative z-10 w-full">
           <Suspense fallback={<div>Please wait...</div>}>{children}</Suspense>
         </div>
       </body>
