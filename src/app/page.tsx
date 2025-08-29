@@ -189,6 +189,7 @@ export default function Home() {
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
+          {/* Left side: Logo + Name */}
           <div className="flex items-center gap-2">
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
@@ -198,38 +199,45 @@ export default function Home() {
               <Bot className="h-6 w-6 text-primary" />
             </motion.div>
             <TypeAnimation
-              sequence={["Adiyakhuu", 1000]}
+              sequence={["Adyaakhuu", 1000]}
               wrapper="span"
               repeat={Infinity}
+              className="font-bold text-lg tracking-tight"
             />
           </div>
 
-          {/* Lang Switch */}
-          <div className="inline-flex items-center gap-1 rounded-xl border bg-muted p-1 shadow-sm">
-            <button
-              type="button"
-              aria-label="Switch to English"
-              onClick={() => setLang("en")}
-              className={`px-3 py-1.5 rounded-md text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background ${
-                lang === "en"
-                  ? "bg-background shadow"
-                  : "hover:bg-background/50"
-              }`}
-            >
-              EN
-            </button>
-            <button
-              type="button"
-              aria-label="Switch to Mongolian"
-              onClick={() => setLang("mn")}
-              className={`px-3 py-1.5 rounded-md text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background ${
-                lang === "mn"
-                  ? "bg-background shadow"
-                  : "hover:bg-background/50"
-              }`}
-            >
-              MN
-            </button>
+          <span className="text-xs text-muted-foreground max-w-2xl text-center">
+            Хэрвээ AI ажиллахгүй байвал сервер түр хугацаанд унтарсан байж
+            магадгүй. Минут хүлээгээд дахин оролдоод үзээрэй!
+          </span>
+          {/* Right side: Notice + Lang switch */}
+          <div className="flex flex-col items-end gap-1 text-right">
+            <div className="inline-flex items-center gap-1 rounded-xl border bg-muted p-1 shadow-sm">
+              <button
+                type="button"
+                aria-label="Switch to English"
+                onClick={() => setLang("en")}
+                className={`px-3 py-1.5 rounded-md text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background ${
+                  lang === "en"
+                    ? "bg-background shadow"
+                    : "hover:bg-background/50"
+                }`}
+              >
+                EN
+              </button>
+              <button
+                type="button"
+                aria-label="Switch to Mongolian"
+                onClick={() => setLang("mn")}
+                className={`px-3 py-1.5 rounded-md text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background ${
+                  lang === "mn"
+                    ? "bg-background shadow"
+                    : "hover:bg-background/50"
+                }`}
+              >
+                MN
+              </button>
+            </div>
           </div>
         </div>
       </header>
