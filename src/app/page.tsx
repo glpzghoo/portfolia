@@ -199,7 +199,7 @@ export default function Home() {
               <Bot className="h-6 w-6 text-primary" />
             </motion.div>
             <TypeAnimation
-              sequence={["Adyaakhuu", 1000]}
+              sequence={["Adiyakhuu", 1000]}
               wrapper="span"
               repeat={Infinity}
               className="font-bold text-lg tracking-tight"
